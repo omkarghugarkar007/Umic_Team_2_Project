@@ -7,12 +7,12 @@
       <legacyMode>false</legacyMode>
       <alwaysOn>true</alwaysOn>
       <updateRate>20</updateRate>
-      <leftfrontJoint>left_front_wheel_hinge</leftfrontJoint>
-      <rightfrontJoint>right_front_wheel_hinge</rightfrontJoint>
-      <leftbackJoint>left_back_wheel_hinge</leftbackJoint>
-      <rightbackJoint>right_back_wheel_hinge</rightbackJoint>
-      <wheelDiameter>0.05</wheelDiameter>
-      <wheelSeparation>0.2</wheelSeparation>
+      <!--leftfrontJoint>left_front_wheel_hinge</leftfrontJoint-->
+      <!--rightfrontJoint>right_front_wheel_hinge</rightfrontJoint-->
+      <leftJoint>left_wheel_hinge</leftJoint>
+      <rightJoint>right_wheel_hinge</rightJoint>
+      <wheelDiameter>0.20</wheelDiameter>
+      <wheelSeparation>0.3</wheelSeparation>
       <torque>20</torque>
       <commandTopic>cmd_vel</commandTopic>
       <odometryTopic>odom</odometryTopic>
@@ -21,7 +21,7 @@
     </plugin>
   </gazebo>
 
-  <gazebo reference="base_link">
+  <gazebo reference="chassis">
       <material>Gazebo/Orange</material>
     </gazebo>
 
