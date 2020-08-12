@@ -98,7 +98,7 @@ if __name__ == '__main__':
         velocity_publisher = rospy.Publisher('/cmd_vel', Twist, queue_size=10)
         vel_msg = Twist()
     	#circle()
-        move(distance=500)
+        move(distance=50)
         rotate()
         move(distance=50)
         rotate()
