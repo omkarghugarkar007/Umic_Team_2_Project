@@ -7,10 +7,10 @@
       <legacyMode>false</legacyMode>
       <alwaysOn>true</alwaysOn>
       <updateRate>20</updateRate>
-      <!--leftfrontJoint>left_front_wheel_hinge</leftfrontJoint-->
-      <!--rightfrontJoint>right_front_wheel_hinge</rightfrontJoint-->
       <leftJoint>left_wheel_hinge</leftJoint>
       <rightJoint>right_wheel_hinge</rightJoint>
+      <!--leftbackJoint>back_left_hinge</leftbackJoint-->
+      <!--rightbackJoint>right_right_hinge</rightbackJoint-->
       <wheelDiameter>0.20</wheelDiameter>
       <wheelSeparation>0.3</wheelSeparation>
       <torque>20</torque>

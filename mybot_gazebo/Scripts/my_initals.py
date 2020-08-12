@@ -1,13 +1,25 @@
 #!/usr/bin/env python
 import rospy
 from geometry_msgs.msg import Twist
+import time
 
 PI = 3.1415926535897
+
+def circle():
+ while(True):
+    vel_msg.linear.x=0.2
+    vel_msg.linear.y=0
+    vel_msg.linear.z=0
+    vel_msg.angular.x = 0
+    vel_msg.angular.y = 0
+    vel_msg.angular.z = 0.2
+    velocity_publisher.publish(vel_msg)
+
 
 def rotate():
 
     speed = 10
-    angle = 90
+    angle = 200
 
    
     angular_speed = speed*2*PI/360
@@ -20,7 +32,7 @@ def rotate():
     vel_msg.angular.y = 0
 
     
-    vel_msg.angular.z = -abs(angular_speed)
+    vel_msg.angular.z = abs(angular_speed)
  
     t0 = rospy.Time.now().to_sec()
     current_angle = 0
@@ -33,7 +45,8 @@ def rotate():
 
     #Forcing our robot to stop
     vel_msg.angular.z = 0
-    
+    velocity_publisher.publish(vel_msg)
+    time.sleep(2)
 
 def move(distance):
     #Receiveing the user's input
@@ -64,6 +77,8 @@ def move(distance):
         current_distance= speed*(t1-t0)
         #After the loop, stops the robot
     vel_msg.linear.x = 0
+    velocity_publisher.publish(vel_msg)
+    time.sleep(2)
 
 def stop():
 
@@ -82,12 +97,13 @@ if __name__ == '__main__':
         rospy.init_node('robot_cleaner', anonymous=True)
         velocity_publisher = rospy.Publisher('/cmd_vel', Twist, queue_size=10)
         vel_msg = Twist()
+    	#circle()
         move(distance=500)
         rotate()
-        move(distance=500)
+        move(distance=50)
         rotate()
-        move(distance=500)
+        move(distance=50)
         rotate()
-        move(distance=400)
+        move(distance=50)
 	stop()
    
