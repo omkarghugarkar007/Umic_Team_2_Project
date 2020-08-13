@@ -1,56 +1,47 @@
+#!/usr/bin/env python
 import rospy
 from geometry_msgs.msg import Twist
 import time
-
 PI = 3.1415926535897
-
-def circle():
- while(True):
-    vel_msg.linear.x=0.2
-    vel_msg.linear.y=0
-    vel_msg.linear.z=0
-    vel_msg.angular.x = 0
-    vel_msg.angular.y = 0
-    vel_msg.angular.z = 0.2
-    velocity_publisher.publish(vel_msg)
-
 
 def rotate():
 
-    speed = 10
-    angle = 90
+    speed = 100
+    angle = 5000
 
    
-    angular_speed = PI
-    relative_angle = PI/2
+    angular_speed = speed*2*PI/360
+    relative_angle = angle*2*PI/360
 
     vel_msg.linear.x=0
-    vel_msg.linear.y=0
-    vel_msg.linear.z=0
+    vel_msg.linear.y=3
+    vel_msg.linear.z=10
     vel_msg.angular.x = 0
     vel_msg.angular.y = 0
 
+    
+    vel_msg.angular.z = abs(angular_speed)
  
     t0 = rospy.Time.now().to_sec()
     current_angle = 0
 
     while(current_angle < relative_angle):
-        vel_msg.angular.z = abs(angular_speed)
         velocity_publisher.publish(vel_msg)
         t1 = rospy.Time.now().to_sec()
         current_angle = angular_speed*(t1-t0)
-        r.sleep()
-	print(current_angle)
+        print(current_angle)
 
 
     #Forcing our robot to stop
     vel_msg.angular.z = 0
+    vel_msg.linear.y = 0
     velocity_publisher.publish(vel_msg)
-    time.sleep(2)
+    time.sleep(5)
+    
 
 def move(distance):
     #Receiveing the user's input
-    speed = 10
+    speed = 5
 
     #Checking if the movement is forward or backwards
     #Since we are moving just in x-axis
@@ -78,25 +69,35 @@ def move(distance):
         #After the loop, stops the robot
     vel_msg.linear.x = 0
     velocity_publisher.publish(vel_msg)
-    time.sleep(10)
+    time.sleep(5)
 
 def stop():
-
+    vel_msg.linear.x = 0
     vel_msg.linear.y = 0
     vel_msg.linear.z = 0
     vel_msg.angular.x = 0
     vel_msg.angular.y = 0
     vel_msg.angular.z = 0
-
-    vel_msg.linear.x = 0
-
     velocity_publisher.publish(vel_msg)
-           
+
+
 if __name__ == '__main__':
  
         rospy.init_node('robot_cleaner', anonymous=True)
         velocity_publisher = rospy.Publisher('/cmd_vel', Twist, queue_size=10)
         vel_msg = Twist()
-        distance(50)
+        move(distance=10)
+        print("1")
+        rotate()
+        print("2")
+        move(distance=10)
+        print("3")
+        rotate()
+        print("4")
+        move(distance=10)
+        print("5")
+        rotate()
+        print("6")
+        move(distance=10)
         stop()
    
