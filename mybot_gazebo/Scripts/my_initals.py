@@ -18,13 +18,15 @@ def circle():
 
 def rotate():
 
-    speed = 10
-    angle = 200
+    speed = 5
+    angle = 90
 
    
-    angular_speed = speed*2*PI/360
+    #angular_speed = speed*2*PI/360
+    angular_speed = 0.09
     relative_angle = angle*2*PI/360
-
+    x = relative_angle/angular_speed
+    print(x)
     vel_msg.linear.x=0
     vel_msg.linear.y=0
     vel_msg.linear.z=0
@@ -37,10 +39,12 @@ def rotate():
     t0 = rospy.Time.now().to_sec()
     current_angle = 0
 
-    while(current_angle < relative_angle):
+    for i in range(0,int(x)+10):
         velocity_publisher.publish(vel_msg)
         t1 = rospy.Time.now().to_sec()
         current_angle = angular_speed*(t1-t0)
+        time.sleep(1)
+        print(current_angle)
 
 
     #Forcing our robot to stop
@@ -99,10 +103,16 @@ if __name__ == '__main__':
         vel_msg = Twist()
     	#circle()
         move(distance=50)
+	stop()
         rotate()
+	stop()
         move(distance=50)
+	stop()
         rotate()
+	stop()
         move(distance=50)
+	stop()
         rotate()
+	stop()
         move(distance=50)
 	stop()
