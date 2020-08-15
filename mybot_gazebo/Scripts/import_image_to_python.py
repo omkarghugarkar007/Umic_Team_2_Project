@@ -16,5 +16,5 @@ def detect(data):
     k = cv2.waitKey(5) & 0xFF
 if __name__ == '__main__':
 	rospy.init_node('image_gazebo', anonymous=True)
-	rospy.Subscriber("/front_cam/camera/image", Image, detect)
+	rospy.Subscriber("/mybot/camera1/image_raw", Image, detect)
 	rospy.spin()

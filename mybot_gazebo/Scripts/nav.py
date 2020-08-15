@@ -76,12 +76,9 @@ def move():
 				Create_B_row(good,i)#initial
 				
 
-	#Consider When Bot is in Row x of A
+	#Consider When Bot is in Row x of A where x belongs to 0 to 4
 	else:
 
-		try:
-		Create_B_row(good_prev,current_row-5)#When current_row>=5
-
-		except:
+		
 
 
