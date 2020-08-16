@@ -1,3 +1,7 @@
+import rospy
+from geometry_msgs.msg import Twist,Odometry,Point
+
+
 def orient_along(px, py):
     #rospy.init_node("speed_controller")
     sub = rospy.Subscriber("/mybot/odom", Odometry, newOdom)
@@ -33,3 +37,7 @@ def orient_along(px, py):
         print("Target={}  Current:{}".format(angle_to_goal,theta))
         r.sleep()
         print("not stopping")
+
+if __name__ == "__main__"
+
+	
