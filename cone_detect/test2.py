@@ -22,22 +22,12 @@ def detector(img1,img2_color):
         if m.distance < ratio_thresh * n.distance:
             good_matches.append(m)
     list_kp2 = [kp2[mat.queryIdx].pt for mat in good_matches] 
+    pts = [[i[0],i[1]] for i in list_kp2]
     print(list_kp2)
-    if(len(good_matches)>5):
-        ret,thresh = cv2.threshold(img2,127,255,0)
-        im2, contours, hierarchy = cv2.findContours(thresh, cv2.RETR_TREE, cv2.CHAIN_APPROX_NONE)
-        sd = ShapeDetector()
-        cnts = []
-        for cnt in contours:
-            if sd.detect(cnt) == "triangle":
-                cnts.append(cnt)
-        cv2.drawContours(img2_color, cnts, -1, (0,0,255), 3)   
-        for cnt in cnts:
-            try:
-                ellipse = cv2.fitEllipse(cnt)
-                img2_color = cv2.ellipse(img2_color,ellipse,(0,255,0))
-            except:
-                pass     
+    x = np.mean([pts[i][0] for i in range(len(pts))])
+    y = np.mean([pts[i][1] for i in range(len(pts))])
+    if(len(good_matches)>5):   
+        cv2.ellipse(img2_color,(int(x),int(y)),(100,100),0,0,360,(0,255,0),4)    
         cv2.imshow('Refined', img2_color)
         cv2.waitKey(0)
         return 1
@@ -47,7 +37,7 @@ def detector(img1,img2_color):
 
 
 img1 = cv2.imread('cone.jpg',0)
-img2 = cv2.imread('cone.jpg')# Image obtained from the bot
+img2 = cv2.imread('cone1.png')# Image obtained from the bot
 
 detector(img1,img2)
 
