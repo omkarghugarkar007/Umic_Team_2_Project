@@ -14,4 +14,4 @@ rosrun image_view image_view image:=/mybot/camera1/image_raw
 
 Use rostopic to find the topics for sonar AND ir
 
-lane detection : https://colab.research.google.com/drive/1lBtdTxG8yV2cEVfABYT7wbiNkgvwloQc?authuser=2
+lane detection : https://colab.research.google.com/drive/1a4C4MPtyXVWUm15BKHll8B_8dPn7aquV
